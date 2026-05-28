@@ -4,7 +4,7 @@ def RaizQuad(a):
     if(isinstance(a, int) and a > 0):
         resp = a ** 0.5
     
-    return resp
+    return int(resp)
 
 
 def Potencia(a, b):
@@ -13,4 +13,4 @@ def Potencia(a, b):
     if(isinstance(a, int) and isinstance(b, int)):
         resp = a ** b
 
-    return resp
+    return int(resp)
