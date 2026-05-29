@@ -13,7 +13,7 @@ class TestCalculos(unittest.TestCase):
         
     # [CT03] Calcular Raiz Quadrada Inválida Número Ponto Flutuante
     def test_ct03_raiz_invalida_ponto_flutuante(self):
-        self.assertEqual(RaizQuad(2.63), )
+        self.assertEqual(RaizQuad(2.63), -1)
 
     # [CT04] Raiz Quadrada Inválida Não-Número
     def test_ct04_raiz_invalida_nao_numero(self):
