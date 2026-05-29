@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Obtendo o código fonte do repositório GitHub...'
-                git branch: 'main', url: 'https://github.com/Marcelo-Pessoa/Rayz.git'
+                checkout scm
             }
         }
 
