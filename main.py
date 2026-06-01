@@ -1,8 +1,8 @@
-de RaizQuad(a):
+def RaizQuad(a):
     resp = -1
 
     if(isinstance(a, int) and a > 0):
-        resp = a ** 0.5
+        resp = a ** 0.5 + 3
     
     return int(resp)
 
