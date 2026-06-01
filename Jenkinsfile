@@ -5,7 +5,7 @@ pipeline {
         stage('Testes Unitários') {
             steps {
                 echo 'Executando os testes integrados do repositório...'
-                sh 'python3 testes_main.py -v'
+                bat 'python testes_main.py -v'
             }
         }
     }
