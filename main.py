@@ -2,7 +2,7 @@ def RaizQuad(a):
     resp = -1
 
     if(isinstance(a, int) and a > 0):
-        resp = a ** 0.5 + 3
+        resp = a ** 0.5
     
     return int(resp)
 
