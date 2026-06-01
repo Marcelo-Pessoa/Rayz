@@ -7,7 +7,7 @@ pipeline {
                 echo 'Executando os testes integrados do repositório...'
                 bat '''
                     set "PATH=C:\\Users\\Lucas Rangel\\AppData\\Local\\Programs\\Python\\Python312;%PATH%"
-                    python test_main.py -v
+                    python testes_main.py -v
                 '''
             }
         }
