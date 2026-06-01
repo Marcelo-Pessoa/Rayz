@@ -5,7 +5,10 @@ pipeline {
         stage('Testes Unitários') {
             steps {
                 echo 'Executando os testes integrados do repositório...'
-                sh  'python3 testes_main.py -v'
+                bat '''
+                    set "PATH=C:\\Users\\Lucas Rangel\\AppData\\Local\\Programs\\Python\\Python312;%PATH%"
+                    python testes_main.py -v
+                '''
             }
         }
     }
