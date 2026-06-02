@@ -7,7 +7,7 @@ def RaizQuad(a):
     return int(resp)
 
 
-def Potencia(a, b):
+def def Potencia(a, b):
     resp = -1
 
     if(isinstance(a, int) and isinstance(b, int) and b > 0):
