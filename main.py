@@ -1,4 +1,4 @@
-def RaizQuad(a):{}
+def RaizQuad(a):
     resp = -1
 
     if(isinstance(a, int) and a > 0):
