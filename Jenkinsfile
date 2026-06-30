@@ -7,6 +7,10 @@ pipeline {
 
     stages {
         stage('Testes Unitários') {
+            environment {
+                // Forcing the relative directory mapping
+                HOME = '.' 
+            }
             steps {
                 echo 'Executando os testes integrados do repositório...'
                 sh '''
