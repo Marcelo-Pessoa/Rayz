@@ -1,24 +1,22 @@
 pipeline {
-    agent any // Tells Jenkins to use the Windows agent natively first
+    agent any
 
     stages {
         stage('Testes Unitários') {
             steps {
-                echo 'Executando os testes integrados dentro do container...'
+                echo 'Executando os testes integrados dentro do container com Node e Python...'
                 
-                // We use script block to explicitly run the container with correct Linux pathing
                 script {
-                    // Pull the image manually to be safe
-                    bat 'docker pull node:16-alpine'
+                    // Pull da nova imagem combinada
+                    bat 'docker pull nikolaik/python-nodejs:python3.10-nodejs16-alpine'
                     
-                    // Run the container via an explicit bat command
-                    // We map the workspace to /workspace and override the working directory properly
+                    // Execução utilizando a imagem que já tem tudo pronto
                     bat '''
                         docker run --rm \
                         -v "%WORKSPACE%":/workspace \
                         -w /workspace \
-                        node:16-alpine \
-                        sh -c "echo 'Node version: ' && node -v && python testes_main.py -v"
+                        nikolaik/python-nodejs:python3.10-nodejs16-alpine \
+                        sh -c "node -v && python -v && python testes_main.py -v"
                     '''
                 }
             }
