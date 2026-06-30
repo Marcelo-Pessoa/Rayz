@@ -21,7 +21,7 @@ class TestCalculos(unittest.TestCase):
 
     # [CT05] Calcular Potência Válida
     def test_ct05_potencia_valida(self):
-        self.assertEqual(Potencia(2, 3), -16)
+        self.assertEqual(Potencia(2, 3), 8)
 
     # [CT05] Calcular Potência Válida de Base Negativa
     def test_ct05_2_potencia_invalida_negativa(self):
