@@ -4,18 +4,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Iniciando o processo de Build...'
+                echo 'Preparando o ambiente do projeto...'
                 script {
-                    // Fazendo pull da imagem de build
-                    bat 'docker pull node:16-alpine'
+                    bat 'docker pull nikolaik/python-nodejs:python3.10-nodejs16-alpine'
                     
-                    // execução do build adaptando ao ambiente nativo windows do Docker
+                    // Apenas lista os arquivos ou roda um comando Python válido se necessário
                     bat '''
                         docker run --rm \
                         -v "%WORKSPACE%":/workspace \
                         -w /workspace \
-                        node:16-alpine \
-                        sh -c "echo 'Instalando dependências e buildando...' && npm install"
+                        nikolaik/python-nodejs:python3.10-nodejs16-alpine \
+                        sh -c "echo 'Arquivos no workspace:' && ls -la"
                     '''
                 }
             }
@@ -23,12 +22,8 @@ pipeline {
 
         stage('Testes Unitários') {
             steps {
-                echo 'Executando os testes integrados em um container separado...'
+                echo 'Executando os testes integrados do Django...'
                 script {
-                    // Fazendo pull de imagem com compatibilidade com Python e Node
-                    bat 'docker pull nikolaik/python-nodejs:python3.10-nodejs16-alpine'
-                    
-                    // Executando os testes unitarios
                     bat '''
                         docker run --rm \
                         -v "%WORKSPACE%":/workspace \
