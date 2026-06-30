@@ -1,34 +1,26 @@
 pipeline {
-    agent {
-        docker { 
-            image 'node:16-alpine' 
-            // 1. We map the Windows path to a Linux mount point inside the container
-            args '-v /c/ProgramData/Jenkins/.jenkins/workspace/Docker/:/workspace'
-        }
-    }
-    
-    // 2. We force Jenkins to treat the workspace as the Linux path inside the container
-    options {
-        skipDefaultCheckout()
-    }
-    
+    agent any // Tells Jenkins to use the Windows agent natively first
+
     stages {
         stage('Testes Unitários') {
-            // 3. We use a customWorkspace with a Linux-style path format for the steps
-            agent {
-                docker {
-                    image 'node:16-alpine'
-                    customWorkspace '/workspace'
-                }
-            }
             steps {
-                // Manually checkout since we skipped the default one to avoid the path bug
-                checkout scm 
+                echo 'Executando os testes integrados dentro do container...'
                 
-                echo 'Executando os testes integrados do repositório...'
-                sh '''
-                    python testes_main.py -v
-                '''
+                // We use script block to explicitly run the container with correct Linux pathing
+                script {
+                    // Pull the image manually to be safe
+                    bat 'docker pull node:16-alpine'
+                    
+                    // Run the container via an explicit bat command
+                    // We map the workspace to /workspace and override the working directory properly
+                    bat '''
+                        docker run --rm \
+                        -v "%WORKSPACE%":/workspace \
+                        -w /workspace \
+                        node:16-alpine \
+                        sh -c "echo 'Node version: ' && node -v && python testes_main.py -v"
+                    '''
+                }
             }
         }
     }
